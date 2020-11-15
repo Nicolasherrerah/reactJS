@@ -11,3 +11,49 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.cancel, .add{
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.edit{
+  margin: 10px;
+}
+
+.modal{
+  display: flex;
+  z-index: 40;
+}
+
+
+.chapter{
+  width: min-content !important;
+  display: inline-block;
+}
+
+.logo{
+  margin: 10px 0px;
+}
+
+.navbar{
+  background-color: #aa00ff !important;
+}
+
+.addBtn{
+  color: orange;
+}
+
+
+.entry{
+  border: 10px black !important;
+}
+
+.chapter{
+  width: min-content;
+}
+
+.fav{
+  background-color: pink !important;
+
+}
