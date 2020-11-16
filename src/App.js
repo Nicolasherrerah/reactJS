@@ -1,8 +1,10 @@
 import React, {Component} from 'react'; 
 import Navbar from './components/Navbar'
 import HomePage from './components/HomePage';
-import MangaPage from './components/MangaPage';
-import AnimePage from './components/AnimePage';
+import SignUp from './components/SignUp';
+import LogIn from './components/LogIn';
+import MangaPage from './components/manga/MangaPage';
+import AnimePage from './components/anime/AnimePage';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom'
 
@@ -16,6 +18,8 @@ class App extends Component{
         <div>
           <Navbar/>
           <Route exact path='/' component={HomePage}/>
+          <Route path='/sign-up' component={SignUp}/>
+          <Route path='/log-in' component={LogIn}/>
           <Route path='/manga' component={MangaPage}/>
           <Route path='/anime' component={AnimePage}/>
         </div>

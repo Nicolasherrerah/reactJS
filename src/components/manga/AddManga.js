@@ -1,5 +1,6 @@
 import React, {Component} from 'react'; 
 import { connect } from 'react-redux';
+import {addManga} from '../../store/actions/Actions'
 
 class AddManga extends Component {
 
@@ -81,9 +82,7 @@ class AddManga extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         toggleForm: (bool)=>{ dispatch({type: 'TOGGLE_FORM', showAddForm: bool}) },
-        addManga: (manga) =>{
-            manga.id = Math.random();
-            dispatch({type: 'ADD_MANGA', manga: manga});
+        addManga: (manga) =>{ dispatch(addManga(manga));
         }
     }
 }

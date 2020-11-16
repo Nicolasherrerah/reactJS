@@ -14,7 +14,10 @@ const Navbar = () =>{
             </div>
             <div className="navbar-end">
                 <div className="navbar-item">
-                    <a className="button is-primary">Log out</a>
+                    <NavLink to="/sign-up" className="button is-primary" >Sign up</NavLink>
+                </div>
+                <div className="navbar-item">
+                    <NavLink to="/log-in" className="button is-dark" >Log in</NavLink>
                 </div>
             </div>
 

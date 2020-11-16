@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-class AddMangaBtn extends React.Component{
+class AddBtn extends React.Component{
     
 render(){    
     
@@ -21,4 +21,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(AddMangaBtn); 
+export default connect(null, mapDispatchToProps)(AddBtn); 

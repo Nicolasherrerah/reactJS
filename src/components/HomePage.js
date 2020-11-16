@@ -1,14 +1,17 @@
 import React, {Component} from 'react'; 
-import AnimeList from './AnimeList';
-import MangaList from './MangaList'
+import AnimeList from './anime/AnimeList';
+import MangaList from './manga/MangaList'
 import { connect } from 'react-redux';
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
 
 
 
 class HomePage extends Component{
 
+  
   render(){
-    
+
     const favMangas = this.props.mangas.filter(manga => manga.favorite)
     const favAnime = this.props.animeList.filter(anime => anime.favorite)
 
@@ -26,11 +29,11 @@ class HomePage extends Component{
 
 
 const mapStateToProps = (state) => {
-  //console.log(state)
+  console.log(state)
   return {
       showAddForm: state.showAddForm,
-      mangas: state.mangas,
-      animeList: state.anime
+      mangas: state.mangaReducer.mangas,
+      animeList: state.animeReducer.anime
   }
 }
 
