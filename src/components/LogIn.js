@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { logIn } from '../store/actions/authActions'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 class LogIn extends Component {
 
@@ -19,7 +22,7 @@ class LogIn extends Component {
 
     handleSubmit = (e) =>{
         e.preventDefault();
-        this.props.addUser(this.state);
+        this.props.logIn(this.state);
         this.setState({
             email: "",
             password: ""
@@ -28,10 +31,13 @@ class LogIn extends Component {
     }
 
     render() {
+        if(this.props.uid){
+            return <Redirect to="/"/>
+        }
         return (
             <div className="columns">
                 <br/>
-                <form className="column is-one-third is-offset-one-third box has-background-link-light mt-6" onSubmit={this.handleSubmit}>
+                <form className="column is-one-third is-offset-one-third box has-background-light mt-6" onSubmit={this.handleSubmit}>
                     <h3 className="title">Log in</h3>
                     <div className="field">
                         <label className="label">Email</label>
@@ -63,4 +69,20 @@ class LogIn extends Component {
     }
 }
 
-export default LogIn
+const mapStateToProps = (state) => {
+    const uid = state.firebase.auth.uid
+    return {
+        uid
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logIn: (credentials) =>{ dispatch(logIn(credentials));
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn) 

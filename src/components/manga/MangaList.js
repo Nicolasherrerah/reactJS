@@ -1,5 +1,7 @@
 import React from 'react'
 import Manga from './Manga';
+import { UpdateMangaChapter } from '../../store/actions/Actions'
+import { FavoriteManga } from '../../store/actions/Actions'
 import { connect } from 'react-redux';
 
 class Mangas extends React.Component{
@@ -26,8 +28,8 @@ render(){
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateChapter: (chapter, id) => { dispatch({type: 'UPDATE_MANGA_CHAPTER', mangaChapter: chapter, id}) },
-        isFavorite: (bool, id) => {dispatch({type: 'UPDATE_FAVORITE_MANGA', favorite: bool, id})}
+        updateChapter: (chapter, id) => { dispatch(UpdateMangaChapter(chapter, id)) },
+        isFavorite: (bool, id) => {dispatch(FavoriteManga( bool, id ))}
     }
 }
 
