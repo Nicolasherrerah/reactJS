@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Anime({anime, updateChapter, isFavorite}){
+function Anime({anime, updateChapter, isFavorite, deleteAnime}){
 
     function chapterChange(e){
         updateChapter(e.target.value, anime.id);
@@ -9,6 +9,10 @@ function Anime({anime, updateChapter, isFavorite}){
     
     function changeFavorite(){
         isFavorite(!anime.favorite, anime.id)
+    }
+
+    function handleDelete(){
+        deleteAnime(anime.id)
     }
 
     return (
@@ -21,7 +25,16 @@ function Anime({anime, updateChapter, isFavorite}){
                     {anime.rating}/10
                 </h6>
              </div>
+
             <h5 className="title">{anime.title}</h5>
+            <div className="level mb-0">
+                <div className="level-left"></div>
+                  <div className="level-right">
+                      <div className="level-item">
+                        <button className="icon button has-text-danger has-background-white del" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button>
+                      </div>
+                  </div>
+            </div> 
             <div className="level">
                 <div className="level-left">
                     <div className="level-item"><h6 className="subtitle">CHAPTER </h6></div>

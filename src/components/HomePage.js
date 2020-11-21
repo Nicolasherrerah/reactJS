@@ -6,7 +6,6 @@ import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 
 
-
 class HomePage extends Component{
 
   
@@ -26,7 +25,6 @@ class HomePage extends Component{
     let favManga = this.props.mangas.filter(manga => manga.favorite)
     let favAnime = this.props.animeList.filter(anime => anime.favorite)
 
-    if(this.props.uid){
     return ( 
       <div className="container">
         <br/>
@@ -39,13 +37,9 @@ class HomePage extends Component{
       </div>
     )
   }
-  else{
-    return(
-        <div id="back"></div>
-      )
-  }
+
 }
-}
+
 
 
 const mapStateToProps = (state) => {
@@ -67,5 +61,14 @@ const mapStateToProps = (state) => {
 
 export default  compose(
   connect(mapStateToProps),
-  firestoreConnect( () => ['mangas', 'animes'])
+  firestoreConnect( (ownProps) => [
+    {
+      collection: 'mangas',
+      where: ['authorId', '==', ownProps.uid]
+    },
+    {
+      collection: 'animes',
+      where: ['authorId', '==', ownProps.uid]
+    }
+  ])
 )(HomePage);

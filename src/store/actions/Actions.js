@@ -1,12 +1,26 @@
 export const addManga = (manga) =>{
     return (dispatch, getState, {getFirebase}) =>{
         const firestore = getFirebase().firestore();
+        const authorId = getState().firebase.auth.uid
         firestore.collection('mangas').add({
-            ...manga
+            ...manga,
+            authorId
         }).then(()=>{
             dispatch({type: 'ADD_MANGA', manga})
         }).catch((err) => {
             dispatch({type: 'ADD_MANGA_ERROR', err})
+        });
+}};
+
+export const deleteManga = (id) =>{
+    return (dispatch, getState, {getFirebase}) =>{
+        const firestore = getFirebase().firestore();
+        firestore.collection('mangas').doc(id).delete({
+
+        }).then(()=>{
+            dispatch({type: 'DELETE_MANGA'})
+        }).catch((err) => {
+            dispatch({type: 'DELETE_MANGA_ERROR', err})
         });
 }};
 
@@ -61,12 +75,26 @@ export const FavoriteAnime = (bool, id) =>{
 export const addAnime = (anime) =>{
     return (dispatch, getState, {getFirebase}) =>{
         const firestore = getFirebase().firestore();
+        const authorId = getState().firebase.auth.uid
         firestore.collection('animes').add({
-            ...anime
+            ...anime,
+            authorId
         }).then(()=>{
             dispatch({type: 'ADD_ANIME', anime})
         }).catch((err) => {
             dispatch({type: 'ADD_ANIME_ERROR', err})
         });
 }}
+
+export const deleteAnime = (id) =>{
+    return (dispatch, getState, {getFirebase}) =>{
+        const firestore = getFirebase().firestore();
+        firestore.collection('animes').doc(id).delete({
+
+        }).then(()=>{
+            dispatch({type: 'DELETE_ANIME'})
+        }).catch((err) => {
+            dispatch({type: 'DELETE_ANIME_ERROR', err})
+        });
+}};
 

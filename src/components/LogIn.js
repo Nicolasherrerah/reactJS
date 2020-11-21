@@ -35,9 +35,9 @@ class LogIn extends Component {
             return <Redirect to="/"/>
         }
         return (
-            <div className="columns">
+            <div className="columns is-align-items-center is-justify-content-center">
                 <br/>
-                <form className="column is-one-third is-offset-one-third box has-background-light mt-6" onSubmit={this.handleSubmit}>
+                <form className="column is-one-third box has-background-light m-6" onSubmit={this.handleSubmit}>
                     <h3 className="title">Log in</h3>
                     <div className="field">
                         <label className="label">Email</label>

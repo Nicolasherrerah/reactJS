@@ -16,6 +16,10 @@ const animeReducer = (state = initState,  action) => {
             ...state,
             anime: [...state.anime, {...action.anime}]
         }
+    }    
+    if (action.type === 'DELETE_ANIME'){
+        //console.log(action);
+        return state
     }
     if (action.type === 'UPDATE_ANIME_CHAPTER') {
         let updatedAnime = state.anime.map( anime => 

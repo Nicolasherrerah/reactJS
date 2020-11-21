@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Manga({manga, updateChapter, isFavorite}){
+function Manga({manga, updateChapter, isFavorite, deleteManga}){
 
     function chapterChange(e){
         updateChapter(e.target.value, manga.id);
@@ -8,6 +8,10 @@ function Manga({manga, updateChapter, isFavorite}){
 
     function changeFavorite(){
         isFavorite(!manga.favorite, manga.id)
+    }
+
+    function handleDelete(){
+        deleteManga(manga.id)
     }
 
     return (
@@ -21,6 +25,14 @@ function Manga({manga, updateChapter, isFavorite}){
                 </h6>
              </div>
             <h5 className="title">{manga.title}</h5>
+            <div className="level mb-0">
+                <div className="level-left"></div>
+                  <div className="level-right">
+                      <div className="level-item">
+                        <button className="icon button has-text-danger has-background-white del" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button>
+                      </div>
+                  </div>
+            </div> 
             <div className="level">
                 <div className="level-left">
                     <div className="level-item"><h6 className="subtitle">CHAPTER </h6></div>

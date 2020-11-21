@@ -29,15 +29,22 @@ class MangaPage extends Component{
 
 const mapStateToProps = (state) => {
   const mangas = state.firestore.ordered.mangas;
+  const uid = state.firebase.auth.uid
   console.log(state)
 
   return {
       showAddForm: state.mangaReducer.showAddForm,
-      mangas: mangas
+      mangas: mangas,
+      uid
   }
 }
 
 export default  compose(
   connect(mapStateToProps),
-  firestoreConnect( () => ['mangas'])
+  firestoreConnect( (ownProps) => [
+    {
+      collection: 'mangas',
+      where: ['authorId', '==', ownProps.uid]
+    }
+  ])
 )(MangaPage);

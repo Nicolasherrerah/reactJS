@@ -43,7 +43,7 @@ class SignUp extends Component {
         return (
             <div className="container">
                 <br/>
-                <form className="box" onSubmit={this.handleSubmit}>
+                <form className="box m-6" onSubmit={this.handleSubmit}>
                     <h3 className="title has-text-centered">Sign up</h3>
                     <div className="field">
                         <label className="label">Name</label>

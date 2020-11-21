@@ -2,6 +2,7 @@ import React from 'react'
 import Anime from './Anime';
 import { UpdateAnimeChapter } from '../../store/actions/Actions'
 import { FavoriteAnime } from '../../store/actions/Actions'
+import { deleteAnime } from '../../store/actions/Actions'
 import { connect } from 'react-redux';
 
 class AnimeList extends React.Component{
@@ -11,7 +12,7 @@ render(){
         list.map(anime => {
             //console.log(anime);
             return (
-                <Anime anime={anime} key={anime.id} updateChapter={this.props.updateChapter} isFavorite={this.props.isFavorite}/>
+                <Anime anime={anime} key={anime.id} updateChapter={this.props.updateChapter} isFavorite={this.props.isFavorite} deleteAnime={this.props.deleteAnime}/>
             ) 
         })
     ) : ( <p className="is-size-4 has-text-centered"> Add anime to see information </p> );
@@ -28,7 +29,8 @@ render(){
 const mapDispatchToProps = (dispatch) => {
     return {
         updateChapter: (chapter, id) => { dispatch(UpdateAnimeChapter(chapter, id)) },
-        isFavorite: (bool, id) => {dispatch(FavoriteAnime( bool, id ))}
+        isFavorite: (bool, id) => {dispatch(FavoriteAnime( bool, id ))},
+        deleteAnime: (id) => {dispatch(deleteAnime( id ))}
 
     }
 }

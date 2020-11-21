@@ -6,7 +6,7 @@ const authReducer = (state= {}, action) =>{
         return action.error;
     }
     if (action.type === 'LOG_OUT') {
-        return state;
+        return state
     }
     if (action.type === 'LOG_OUT_ERROR') {
         return action.error;

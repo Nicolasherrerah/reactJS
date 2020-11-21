@@ -17,6 +17,10 @@ const mangaReducer = (state = initState,  action) => {
             mangas: [...state.mangas, {...action.manga}]
         }
     }
+    if (action.type === 'DELETE_MANGA'){
+        //console.log(action);
+        return state
+    }
     if (action.type === 'UPDATE_MANGA_CHAPTER') {
         let updatedManga = state.mangas.map( manga => 
             (manga.id === action.id ? Object.assign({}, manga, { ...manga, chapter: action.mangaChapter }) : manga)

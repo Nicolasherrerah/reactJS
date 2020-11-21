@@ -59,3 +59,15 @@ code {
   background-color: pink !important;
 
 }
+
+.del {
+  border-color: grey;
+}
+
+
+@media screen and (min-width: 1024px){
+  #navbarMenu{
+    background-color: inherit !important;
+  }
+
+}

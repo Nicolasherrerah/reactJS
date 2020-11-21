@@ -9,7 +9,9 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { createFirestoreInstance } from 'redux-firestore'
-import { ReactReduxFirebaseProvider, getFirebase} from 'react-redux-firebase'
+import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
+
+
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({ getFirebase })));
@@ -21,12 +23,13 @@ const rrfProps = {
   createFirestoreInstance,
 }
 
+
 ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-            <ReactReduxFirebaseProvider {...rrfProps}>
-              <App />
-            </ReactReduxFirebaseProvider>
+          <ReactReduxFirebaseProvider {...rrfProps}>
+            <App />
+          </ReactReduxFirebaseProvider>
       </Provider>
     </React.StrictMode>,
   document.getElementById('root')

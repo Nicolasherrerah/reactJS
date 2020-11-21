@@ -2,6 +2,7 @@ import React from 'react'
 import Manga from './Manga';
 import { UpdateMangaChapter } from '../../store/actions/Actions'
 import { FavoriteManga } from '../../store/actions/Actions'
+import { deleteManga } from '../../store/actions/Actions'
 import { connect } from 'react-redux';
 
 class Mangas extends React.Component{
@@ -11,7 +12,7 @@ render(){
         mangas.map(manga => {
             //console.log(manga);
             return (
-                <Manga manga={manga} key={manga.id} updateChapter={this.props.updateChapter} isFavorite={this.props.isFavorite}/>
+                <Manga manga={manga} key={manga.id} updateChapter={this.props.updateChapter} isFavorite={this.props.isFavorite} deleteManga={this.props.deleteManga} />
             ) 
         })
     ) : ( <p className="is-size-4 has-text-centered"> Add manga to see information </p> );
@@ -29,7 +30,8 @@ render(){
 const mapDispatchToProps = (dispatch) => {
     return {
         updateChapter: (chapter, id) => { dispatch(UpdateMangaChapter(chapter, id)) },
-        isFavorite: (bool, id) => {dispatch(FavoriteManga( bool, id ))}
+        isFavorite: (bool, id) => {dispatch(FavoriteManga( bool, id ))},
+        deleteManga: (id) => {dispatch(deleteManga( id ))}
     }
 }
 

@@ -27,14 +27,21 @@ class AnimePage extends Component{
 
 const mapStateToProps = (state) => {
   const anime = state.firestore.ordered.animes;
+  const uid = state.firebase.auth.uid
   //console.log(state)
   return {
       showAddForm: state.animeReducer.showAddForm,
-      anime: anime
+      anime: anime,
+      uid
   }
 }
 
 export default  compose(
   connect(mapStateToProps),
-  firestoreConnect( () => ['animes'])
+  firestoreConnect((ownProps) => [
+    {
+      collection: 'animes',
+      where: ['authorId', '==', ownProps.uid]
+    }
+  ])
 )(AnimePage);
