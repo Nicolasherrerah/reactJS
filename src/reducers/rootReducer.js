@@ -8,7 +8,7 @@ const rootReducer = (state = initState,  action) => {
     if (action.type === 'TOGGLE_FORM') {
         return{
             ...state,
-            showAddForm: action.showAddForm
+            showAddForm: !state.showAddForm
         }
     }
     if (action.type === 'ADD_MANGA'){
@@ -29,7 +29,7 @@ const rootReducer = (state = initState,  action) => {
         let updatedManga = state.mangas.map( manga => 
             (manga.id === action.id ? Object.assign({}, manga, { ...manga, chapter: action.mangaChapter }) : manga)
         )
-        console.log(updatedManga);
+        //console.log(updatedManga);
         return{
             ...state,
             mangas: updatedManga
@@ -39,7 +39,7 @@ const rootReducer = (state = initState,  action) => {
         let updatedManga = state.mangas.map( manga => 
             (manga.id === action.id ? Object.assign({}, manga, { ...manga, favorite: action.favorite }) : manga)
         )
-        console.log(updatedManga);
+        //console.log(updatedManga);
         return{
             ...state,
             mangas: updatedManga
@@ -49,7 +49,7 @@ const rootReducer = (state = initState,  action) => {
         let updatedAnime = state.anime.map( anime => 
             (anime.id === action.id ? Object.assign({}, anime, { ...anime, chapter: action.animeChapter }) : anime)
         )
-        console.log(updatedAnime);
+        //console.log(updatedAnime);
         return{
             ...state,
             anime: updatedAnime
@@ -59,7 +59,7 @@ const rootReducer = (state = initState,  action) => {
         let updatedAnime = state.anime.map( anime => 
             (anime.id === action.id ? Object.assign({}, anime, { ...anime, favorite: action.favorite }) : anime)
         )
-        console.log(updatedAnime);
+        //console.log(updatedAnime);
         return{
             ...state,
             anime: updatedAnime

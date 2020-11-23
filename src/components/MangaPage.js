@@ -1,32 +1,22 @@
-import React, {Component} from 'react'; 
+import React from 'react'; 
 import MangaList from './MangaList';
 import AddManga from './AddManga'
 import AddMangaBtn from './AddMangaBtn'
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+function MangaPage() {
+  const mangas = useSelector(state => state.mangas);
+  const showAddForm = useSelector(state => state.showAddForm);
 
-
-class MangaPage extends Component{
-
-  render(){
-    return (
-        <div>
-          <br/>
-          <h1 className="title is-1 has-text-centered">Following</h1>
-          <MangaList mangas={this.props.mangas}/>
-          <AddManga showAddForm={this.props.showAddForm}/>
-          {!this.props.showAddForm && <AddMangaBtn/>}
-        </div>
-  )}
+  return (
+    <div>
+      <h1 className="title is-1 has-text-centered">Following</h1>
+      <MangaList mangas={mangas}/>
+      <AddManga showAddForm={showAddForm}/>
+      {!showAddForm && <AddMangaBtn/>}
+    </div>
+  )
 }
 
+export default MangaPage
 
-const mapStateToProps = (state) => {
-  console.log(state)
-  return {
-      showAddForm: state.showAddForm,
-      mangas: state.mangas
-  }
-}
-
-export default connect(mapStateToProps)(MangaPage)

@@ -1,24 +1,18 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
-class AddMangaBtn extends React.Component{
-    
-render(){    
-    
-    const handleClick = () =>{
-        this.props.toggleForm(true);
-      }
+
+function AddMangaBtn() {
+
+    const dispatch = useDispatch();
+    const toggleForm = () =>{
+        dispatch({type: 'TOGGLE_FORM'})
+    }
     
     return(
-        <a className="icon is-large addBtn is-pulled-right mr-4" onClick={handleClick} href="#modal" ><i className="fas fa-3x fa-plus-circle"></i></a>
-    )    
-}
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        toggleForm: (bool) => { dispatch({type: 'TOGGLE_FORM', showAddForm: bool}) }
-    }
+        <a className="icon is-large addBtn is-pulled-right mr-4" onClick={toggleForm} href="#modal" ><i className="fas fa-3x fa-plus-circle"></i></a>
+    ) 
 }
 
-export default connect(null, mapDispatchToProps)(AddMangaBtn); 
+export default AddMangaBtn
+

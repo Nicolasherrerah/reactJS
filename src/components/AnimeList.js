@@ -1,15 +1,27 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import Anime from './Anime';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { UpdateAnimeChapter } from '../actions/allActions'
+import { FavoriteAnime } from '../actions/allActions'
 
-class AnimeList extends React.Component{
-render(){   
-    const list = this.props.anime;
+function AnimeList({anime}) {
+        
+    const dispatch = useDispatch();
+
+    const updateChapter = useCallback(
+        (chapter, id) => dispatch(UpdateAnimeChapter(chapter, id))
+    )
+
+    const isFavorite = useCallback(
+        (bool, id) => dispatch(FavoriteAnime(bool, id))
+    )
+
+    const list = anime;
     const animeList = list.length ? (        
         list.map(anime => {
-            //console.log(anime);
+            //console.log(manga);
             return (
-                <Anime anime={anime} key={anime.id} updateChapter={this.props.updateChapter} isFavorite={this.props.isFavorite}/>
+                <Anime anime={anime} key={anime.id} updateChapter={updateChapter} isFavorite={isFavorite}/>
             ) 
         })
     ) : ( <p className="is-size-4 has-text-centered"> Add anime to see information </p> );
@@ -20,15 +32,6 @@ render(){
             {animeList}
         </div>
     )
-}}
-
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateChapter: (chapter, id) => { dispatch({type: 'UPDATE_ANIME_CHAPTER', animeChapter: chapter, id}) },
-        isFavorite: (bool, id) => {dispatch({type: 'UPDATE_FAVORITE_ANIME', favorite: bool, id})}
-
-    }
 }
 
-export default connect(null, mapDispatchToProps)(AnimeList)
+export default AnimeList

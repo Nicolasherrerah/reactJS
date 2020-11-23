@@ -1,91 +1,74 @@
-import React, {Component} from 'react'; 
-import { connect } from 'react-redux';
+import { useDispatch} from 'react-redux';
+import React, {useState} from 'react'
+import {addAnime} from '../actions/allActions'
 
-class AddAnime extends Component {
+function AddAnime( {showAddForm} ) {
 
-    state = {
-        title: "",
-        chapter: 0,
-        rating: 0,
-        favorite: false
+    const [newAnime, setNewAnime] = useState('');
+    const dispatch = useDispatch();
+
+    const addNewAnime = (anime) => {
+        anime.id = Math.random();
+        dispatch(addAnime(anime))
     }
 
-    handleChange = (e) =>{
+    const toggleForm = () =>{
+        dispatch({type: 'TOGGLE_FORM'})
+    }
+
+    const handleChange = (e) =>{
         let value = e.target.value; 
         let name = e.target.name; 
-        this.setState((prevState) => ({
+        setNewAnime((prevState) => ({
             ...prevState,
             [name]: value
         }))
     }
 
-    handleSubmit = (e) =>{
+    const handleSubmit = (e) =>{
         e.preventDefault();
-        this.props.addAnime(this.state);
-        this.setState({
-            title: "",
-            chapter: 0,
-            rating: 0
-        })
+        addNewAnime(newAnime);
+        setNewAnime('')
         e.target.reset();
-        this.props.toggleForm(false)
+        toggleForm(false)
     }
 
-    handleCancel = () =>{
-        this.props.toggleForm(false);
-    }
-
-    render(){
-        const showAddForm = this.props.showAddForm;
-
-        if (showAddForm) {
-            return(
-                <div>
+    if (showAddForm) {
+        return(
+            <div>
                 <div className="modal" id="modal">
                     <div className="modal-background"></div>
                     <div className="modal-content box">
-                        <h5 className="title has-text-centered">New Anime</h5>
-                        <form onSubmit={this.handleSubmit} className="container">
+                        <h5 className="title has-text-centered">New anime</h5>
+                        <form onSubmit={handleSubmit} className="container">
                             <div>
                                 <div>
                                     <label htmlFor="title">TITLE </label>
-                                    <input className="input" type="text" onChange={this.handleChange} name="title" id="title" required/>
+                                    <input className="input" type="text" onChange={handleChange} name="title" id="title" required/>
                                 </div>
-                                <div >
+                                <div>
                                     <label htmlFor="chapter">CHAPTER </label>
-                                    <input className="input" type="number" onChange={this.handleChange} name="chapter" id="chapter" required/>
+                                    <input className="input" type="number" onChange={handleChange} name="chapter" id="chapter" required/>
                                 </div>
                                 <div>
                                     <label htmlFor="rating">RATING </label>
-                                    <input className="input" type="number" onChange={this.handleChange} name="rating" id="rating" required/>
+                                    <input className="input" type="number" onChange={handleChange} name="rating" id="rating" required/>
                                 </div>
-                                <button className="button is-danger is-outlined is-pulled-right cancel" onClick={this.handleCancel} >CANCEL</button>
+                                <button className="button is-danger is-outlined is-pulled-right cancel" onClick={toggleForm} >CANCEL</button>
                                 <input className="button is-primary is-outlined is-pulled-right add" type="submit" value="ADD"/>
                             </div>
                         </form>
                     </div>
-                    <button className="modal-close is-large" aria-label="close" onClick={this.handleCancel}></button>
+                    <button className="modal-close is-large" aria-label="close" onClick={toggleForm}></button>
                 </div>
-                </div>
-            )
-        }
-        else{
-            return(
-                <div></div>
-            )
-        }
+            </div>
+        )
+    }
+    else{
+        return(
+            <div></div>
+        )
     }
 }
 
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        toggleForm: (bool)=>{ dispatch({type: 'TOGGLE_FORM', showAddForm: bool}) },
-        addAnime: (anime) =>{
-            anime.id = Math.random();
-            dispatch({type: 'ADD_ANIME', anime: anime});
-        }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(AddAnime)
+export default AddAnime

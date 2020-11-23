@@ -1,15 +1,29 @@
 import React from 'react'
 import Manga from './Manga';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { UpdateMangaChapter } from '../actions/allActions'
+import { FavoriteManga } from '../actions/allActions'
 
-class Mangas extends React.Component{
-render(){   
-    const mangas = this.props.mangas;
+
+
+function MangaList({mangas}){
+    
+    const dispatch = useDispatch();
+
+    const updateChapter = (chapter, id) => {
+        dispatch(UpdateMangaChapter(chapter, id))
+    }
+
+    const isFavorite = (bool, id) => (
+        dispatch(FavoriteManga(bool, id))
+    )
+
+
     const mangaList = mangas.length ? (        
         mangas.map(manga => {
             //console.log(manga);
             return (
-                <Manga manga={manga} key={manga.id} updateChapter={this.props.updateChapter} isFavorite={this.props.isFavorite}/>
+                <Manga manga={manga} key={manga.id} updateChapter={updateChapter} isFavorite={isFavorite}/>
             ) 
         })
     ) : ( <p className="is-size-4 has-text-centered"> Add manga to see information </p> );
@@ -20,15 +34,9 @@ render(){
             {mangaList}
         </div>
     )
-}}
-
-
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateChapter: (chapter, id) => { dispatch({type: 'UPDATE_MANGA_CHAPTER', mangaChapter: chapter, id}) },
-        isFavorite: (bool, id) => {dispatch({type: 'UPDATE_FAVORITE_MANGA', favorite: bool, id})}
-    }
 }
 
-export default connect(null, mapDispatchToProps)(Mangas)
+export default MangaList
+
+
+
